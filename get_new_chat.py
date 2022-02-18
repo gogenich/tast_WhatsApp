@@ -16,6 +16,7 @@ X-Tasktest-Token: f62cdf1e83bc324ba23aee3b113c6249"""
 7. Загрузить код в гит и прислать вместе со скрином  отправленного сообщения в переписку. 
 """
 import requests
+import pickle
 
 url = 'https://dev.wapp.im/v3/'
 header = {'X-Tasktest-Token': 'f62cdf1e83bc324ba23aee3b113c6249'}
@@ -24,6 +25,6 @@ new_chat = 'chat/spare?crm=TEST&domain=test'
 
 response = requests.get(url + new_chat, headers=header)
 
-print(response.text)
-
-"""{"error_code":404,"error_text":"No free chats"}"""
+"""записываем ответ в фаил"""
+with open('data_chat.txt', 'wb') as out:
+     pickle.dump(response.json(), out)
